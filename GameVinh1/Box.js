@@ -1,7 +1,7 @@
 function Box(x, y, w, h) {
   let options = {
-    friction: 0.1,
-    restitution: 1,
+    friction: 0.2,
+    restitution: 0.8,
   };
   this.body = Bodies.rectangle(x, y, w, h, options);
   this.w = w;

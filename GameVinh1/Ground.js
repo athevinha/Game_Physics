@@ -1,5 +1,13 @@
-function Ground(x, y, w, h) {
-  this.body = Bodies.rectangle(x, y, w, h, { isStatic: true, angle: PI / 4 });
+function Ground(x, y, w, h, angle) {
+  console.log(angle);
+  if (angle) this.angle = angle;
+  let options = {
+    isStatic: true,
+    angle: this.angle,
+    friction: 0,
+    restitution: 0.5,
+  };
+  this.body = Bodies.rectangle(x, y, w, h, options);
   this.w = w;
   this.h = h;
 

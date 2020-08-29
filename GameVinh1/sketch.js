@@ -21,10 +21,11 @@ function setup() {
     isStatic: true,
     angle: PI / 4,
   };
-  GROUNDS.push(new Ground(200, height, width, 10));
-  GROUNDS.push(new Ground(200, 0, width, 10));
-  GROUNDS.push(new Ground(0, 200, 10, height));
-  GROUNDS.push(new Ground(height, 200, 10, height));
+  GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
+  GROUNDS.push(new Ground(200, 0, width, 10, PI / 4));
+  GROUNDS.push(new Ground(0, 200, 10, height, PI / 4));
+  GROUNDS.push(new Ground(height, 200, 10, height, PI / 4));
+  GROUNDS.push(new Ground(width / 2, height, width, 20, PI));
   rectMode(CENTER);
 }
 
