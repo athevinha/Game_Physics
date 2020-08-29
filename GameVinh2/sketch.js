@@ -5,7 +5,7 @@ var Engine = Matter.Engine,
 var engine;
 var world;
 var box1,
-  boxes = [];
+  circles = [];
 let GROUND;
 let GROUNDS = [];
 function setup() {
@@ -23,21 +23,26 @@ function setup() {
   };
   GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
   GROUNDS.push(new Ground(200, 0, width, 10, PI / 4));
-  GROUNDS.push(new Ground(0, 200, 10, height, PI / 4));
+  GROUNDS.push(new Ground(0, 100, 10, height, PI / 1.5));
   GROUNDS.push(new Ground(height, 200, 10, height, PI / 4));
   GROUNDS.push(new Ground(width / 2, height, width, 20, PI));
   rectMode(CENTER);
 }
 
 function mousePressed() {
-  boxes.push(new Box(mouseX, mouseY, 20, 20));
-  console.log(boxes);
+  let RadomColor1 = Math.floor(Math.random() * 200);
+  let RadomColor2 = Math.floor(Math.random() * 200);
+  let RadomColor3 = Math.floor(Math.random() * 200);
+  circles.push(
+    new Circle(mouseX, mouseY, 13, [RadomColor1, RadomColor2, RadomColor3])
+  );
+  console.log(circles);
 }
 
 function draw() {
   background(51);
-  for (let i = 0; i < boxes.length; i++) {
-    boxes[i].show();
+  for (let i = 0; i < circles.length; i++) {
+    circles[i].show();
   }
 
   for (let i = 0; i < GROUNDS.length; i++) {

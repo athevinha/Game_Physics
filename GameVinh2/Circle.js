@@ -1,13 +1,11 @@
-function Box(x, y, w, h) {
+function Circle(x, y, r, RadomColor) {
   let options = {
     friction: 0.2,
     restitution: 0.8,
   };
-  this.body = Bodies.rectangle(x, y, w, h, options);
-  this.w = w;
-  this.h = h;
+  this.body = Bodies.circle(x, y, r, options);
   World.add(world, this.body);
-
+  this.isOffScreen = function () {};
   fill(10, 200, 100);
   line(0, height, width, height);
   this.show = function () {
@@ -16,8 +14,10 @@ function Box(x, y, w, h) {
     push();
     translate(pos.x, pos.y);
     rotate(angle);
-    rectMode(CENTER);
-    rect(0, 0, this.w, this.h);
+    fill(RadomColor[0], RadomColor[1], RadomColor[2]);
+    //rectMode(CENTER);
+    ellipse(0, 0, r * 2);
+    //rect(0, 0, this.w, this.h);
 
     pop();
   };
