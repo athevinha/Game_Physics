@@ -10,7 +10,7 @@ let GROUND;
 let GROUNDS = [];
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1200, 400);
   engine = Engine.create(); //create engine
   world = engine.world; //create wolrd
   // box1 = Bodies.rectangle(100, 0, 8, 8); //create box
@@ -48,33 +48,28 @@ let a = 0,
   BuckHeight = 20,
   POINT = 0;
 function draw() {
-  a++;
-  if (a > FPS) {
-    a = 0;
-    let radom = Math.floor(Math.random() * 350) + 50;
-    circles.push(new Circle(radom, 10, 13, [100, 200, 150]));
-  }
-
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
+    if (POSITION_X < BuckWidth / 2) {
+      POSITION_X = BuckWidth / 2;
+    }
   }
   if (keyIsDown(RIGHT_ARROW)) {
+    if (POSITION_X > width - BuckWidth / 2) {
+      POSITION_X = width - BuckWidth / 2;
+    }
     POSITION_X += FASTER;
   }
 
   background(51);
 
   for (let i = 0; i < circles.length; i++) {
-    circles[i].show();
-
-    if (circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)) {
-      circles[i].removeFromWorld();
-      circles.splice(i, 1);
-      i--;
-      POINT++;
-
-      document.getElementsByClassName("POINT")[0].innerHTML = POINT;
-    }
+    // circles[i].show();
+    // if (circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)) {
+    //   circles[i].removeFromWorld();
+    //   circles.splice(i, 1);
+    //   i--;
+    // }
   }
 
   for (let i = 0; i < GROUNDS.length; i++) {
