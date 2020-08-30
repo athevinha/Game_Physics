@@ -43,7 +43,6 @@ function setup() {
 let a = 0,
   POSITION_X = 200,
   FASTER = 8,
-  FPS = 100,
   BuckWidth = 100,
   BuckHeight = 20,
   POINT = 0;
@@ -76,8 +75,14 @@ function draw() {
     GROUNDS[i].show();
   }
   //box1.show();
-  fill(10, 200, 100);
-  line(0, height, width, height);
-
   rect(POSITION_X, height - 20, BuckWidth, BuckHeight);
+  fill(10, 200, 100);
+  stroke(100, 150, 100);
+  line(
+    POSITION_X + BuckWidth / 2,
+    height - 20,
+    200,
+    height - 100
+  ).drawingContext.lineWidth = 10;
+  console.log(line(POSITION_X + BuckWidth / 2, height - 20, 200, height - 100));
 }
