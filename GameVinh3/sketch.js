@@ -66,8 +66,14 @@ function draw() {
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
-
-    if (circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)) {
+    console.log(circles[i].body.position.y);
+    if (Math.floor(circles[i].body.position.y) > 375) {
+      circles[i].removeFromWorld();
+      circles.splice(i, 1);
+      i--;
+    } else if (
+      circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)
+    ) {
       circles[i].removeFromWorld();
       circles.splice(i, 1);
       i--;
