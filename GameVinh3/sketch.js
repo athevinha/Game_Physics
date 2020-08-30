@@ -43,9 +43,9 @@ function setup() {
 let a = 0,
   POSITION_X = 200,
   FASTER = 8,
-  FPS = 100,
-  BuckWidth = 100,
-  BuckHeight = 20,
+  FPS = 80,
+  BuckWidth = 100, //Width
+  BuckHeight = 20, //Height
   POINT = 0;
 function draw() {
   a++;
@@ -57,8 +57,14 @@ function draw() {
 
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
+    if (POSITION_X < BuckWidth / 2) {
+      POSITION_X = BuckWidth / 2;
+    }
   }
   if (keyIsDown(RIGHT_ARROW)) {
+    if (POSITION_X > width - BuckWidth / 2) {
+      POSITION_X = width - BuckWidth / 2;
+    }
     POSITION_X += FASTER;
   }
 
@@ -66,13 +72,13 @@ function draw() {
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
-    console.log(circles[i].body.position.y);
     if (Math.floor(circles[i].body.position.y) > 375) {
+      // The ball crash with ground
       circles[i].removeFromWorld();
       circles.splice(i, 1);
       i--;
     } else if (
-      circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)
+      circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight) // The ball crash with buck
     ) {
       circles[i].removeFromWorld();
       circles.splice(i, 1);
