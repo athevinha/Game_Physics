@@ -2,7 +2,8 @@ var Engine = Matter.Engine,
   World = Matter.World,
   Bodies = Matter.Bodies;
 //======================================
-var engine;
+var engine,
+  N = 0;
 var world;
 var box1,
   circles = [];
@@ -15,6 +16,7 @@ function setup() {
   world = engine.world; //create wolrd
   // box1 = Bodies.rectangle(100, 0, 8, 8); //create box
   Engine.run(engine); // run engine
+  //Matter.MouseConstraint.create(engine, {});
   // World.add(world, box1); //render
   // console.log(box1);
   //box1 = new Box(100, 100, 100, 8);
@@ -40,15 +42,28 @@ function setup() {
 //   );
 //   console.log(circles);
 // }
+
 let a = 0,
   POSITION_X = 200,
   FASTER = 8,
   BuckWidth = 100,
   BuckHeight = 20,
   POINT = 0;
+//=============
+let DirX = 300,
+  DirY = 400 - 40,
+  FASTERDIR = 2;
+
+function keyReleased() {
+  if (key == " ") {
+    circles.push(new Circle(DirX, DirY, 13, [255, 255, 255]));
+  }
+  N = 0;
+}
 function draw() {
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
+    DirX -= FASTER;
     if (POSITION_X < BuckWidth / 2) {
       POSITION_X = BuckWidth / 2;
     }
@@ -58,12 +73,25 @@ function draw() {
       POSITION_X = width - BuckWidth / 2;
     }
     POSITION_X += FASTER;
+    DirX += FASTER;
   }
-
+  if (keyIsDown(UP_ARROW)) {
+    DirY -= FASTERDIR;
+    DirX -= FASTERDIR;
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    DirY += FASTERDIR;
+    DirX += FASTERDIR;
+  }
+  if (keyIsDown(32)) {
+    N++;
+    N = N > 100 ? 100 : N;
+  }
   background(51);
 
   for (let i = 0; i < circles.length; i++) {
-    // circles[i].show();
+    circles[i].show();
+    circles[i].shot();
     // if (circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)) {
     //   circles[i].removeFromWorld();
     //   circles.splice(i, 1);
@@ -78,11 +106,6 @@ function draw() {
   rect(POSITION_X, height - 20, BuckWidth, BuckHeight);
   fill(10, 200, 100);
   stroke(100, 150, 100);
-  line(
-    POSITION_X + BuckWidth / 2,
-    height - 20,
-    200,
-    height - 100
-  ).drawingContext.lineWidth = 10;
-  console.log(line(POSITION_X + BuckWidth / 2, height - 20, 200, height - 100));
+  line(POSITION_X + BuckWidth / 2, height - 30, DirX, DirY);
+  //.drawingContext.lineWidth = 10;
 }

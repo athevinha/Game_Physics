@@ -6,6 +6,15 @@ function Circle(x, y, r, RadomColor) {
   World.add(world, this.body);
   fill(10, 200, 100);
   line(0, height, width, height);
+  let a = 0;
+  this.shot = function (eniX, eniY) {
+    a++;
+    if (a < 10) {
+      let pos = this.body.position;
+      pos.x += 1;
+      pos.y -= 1;
+    }
+  };
   this.removeFromWorld = function () {
     World.remove(world, this.body);
   };
