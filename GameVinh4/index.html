@@ -7,13 +7,30 @@
     <script src="./Library/p5.js"></script>
     <script src="./Circle.js"></script>
     <script src="./Ground.js"></script>
+    <script src="./Radar.js"></script>
     <script src="./sketch.js"></script>
 
     <title>GAME COMPOSITES</title>
   </head>
   <body id="char">
-    <div class="engine"></div>
+    <div class="Fullengine">
+      <div class="engine"></div>
+    </div>
   </body>
-  <style></style>
+  <style>
+    .Fullengine {
+      position: relative;
+      width: 800px;
+      height: 50px;
+      background-color: white;
+      border: 5px solid black;
+    }
+    .engine {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background-color: green;
+    }
+  </style>
 </html>
 <h1>Use <- and -> key to control</h1>

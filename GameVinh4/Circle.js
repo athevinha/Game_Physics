@@ -1,18 +1,29 @@
-function Circle(x, y, r, RadomColor) {
+function Circle(x, y, r, RadomColor, N) {
   let options = {
     friction: 0.2,
+    restitution: 0.8,
   };
   this.body = Bodies.circle(x, y, r, options);
   World.add(world, this.body);
   fill(10, 200, 100);
   line(0, height, width, height);
-  let a = 0;
+  this.a = 0;
+  this.N = N;
   this.shot = function (eniX, eniY) {
-    a++;
-    if (a < 10) {
+    this.a++;
+    if (this.a < 10) {
+      console.log(this.a);
       let pos = this.body.position;
-      pos.x += 1;
-      pos.y -= 1;
+      console.log(this.N / 20);
+      pos.x += this.N / 20 - 0.5;
+      pos.y -= this.N / 20;
+    }
+  };
+  this.crashGround = function () {
+    this.a = 0;
+    if (this.body.position.y >= height - 20) {
+      console.log();
+      return true;
     }
   };
   this.removeFromWorld = function () {

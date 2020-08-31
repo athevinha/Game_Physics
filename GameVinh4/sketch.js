@@ -8,10 +8,11 @@ var world;
 var box1,
   circles = [];
 let GROUND;
-let GROUNDS = [];
-
+let GROUNDS = [],
+  Radars;
 function setup() {
   createCanvas(1200, 400);
+
   engine = Engine.create(); //create engine
   world = engine.world; //create wolrd
   // box1 = Bodies.rectangle(100, 0, 8, 8); //create box
@@ -20,6 +21,10 @@ function setup() {
   // World.add(world, box1); //render
   // console.log(box1);
   //box1 = new Box(100, 100, 100, 8);
+  let optionsRadars = {
+    isStatic: true,
+  };
+  Radars = new Radar(DirX - 10, DirY - 15, 100, 5, optionsRadars);
   let options = {
     isStatic: true,
     angle: PI / 4,
@@ -30,6 +35,7 @@ function setup() {
   // GROUNDS.push(new Ground(0, 100, 10, height, PI / 1.5));
   // GROUNDS.push(new Ground(height, 200, 10, height, PI / 4));
   GROUNDS.push(new Ground(width / 2, height, width, 20, PI));
+
   rectMode(CENTER);
 }
 
@@ -52,18 +58,22 @@ let a = 0,
 //=============
 let DirX = 300,
   DirY = 400 - 40,
-  FASTERDIR = 2;
+  FASTERDIRX = 20,
+  FASTERDIRY = 30;
 
 function keyReleased() {
   if (key == " ") {
-    circles.push(new Circle(DirX, DirY, 13, [255, 255, 255]));
+    //console.log(DirY + "   " + DirX);
+    circles.push(new Circle(DirX, DirY, 13, [0, 0, 0], N));
   }
   N = 0;
 }
 function draw() {
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
+    Radars.left(FASTER);
     DirX -= FASTER;
+
     if (POSITION_X < BuckWidth / 2) {
       POSITION_X = BuckWidth / 2;
     }
@@ -72,33 +82,43 @@ function draw() {
     if (POSITION_X > width - BuckWidth / 2) {
       POSITION_X = width - BuckWidth / 2;
     }
+    Radars.right(FASTER);
     POSITION_X += FASTER;
     DirX += FASTER;
   }
   if (keyIsDown(UP_ARROW)) {
-    DirY -= FASTERDIR;
-    DirX -= FASTERDIR;
+    Radars.up(-PI / 60);
   }
   if (keyIsDown(DOWN_ARROW)) {
-    DirY += FASTERDIR;
-    DirX += FASTERDIR;
+    Radars.down(-PI / 60);
+    //DirY = Math.sqrt(Math.abs(2 * 2 - ((DirX + 300) ^ 2))) + 200;
   }
   if (keyIsDown(32)) {
     N++;
     N = N > 100 ? 100 : N;
+    document.getElementsByClassName("engine")[0].style.width = N + "%";
+    console.log(document.getElementsByClassName("engine")[0].width);
   }
   background(51);
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
-    circles[i].shot();
+    circles[i].shot(
+      Radars.body.x + Radars.body.w,
+      Radars.body.y + Radars.body.h
+    );
+    if (circles[i].crashGround()) {
+      circles[i].removeFromWorld();
+      circles.splice(i, 1);
+      i--;
+    }
     // if (circles[i].IsCrash(POSITION_X, height - 20, BuckWidth, BuckHeight)) {
     //   circles[i].removeFromWorld();
     //   circles.splice(i, 1);
     //   i--;
     // }
   }
-
+  Radars.show();
   for (let i = 0; i < GROUNDS.length; i++) {
     GROUNDS[i].show();
   }
@@ -106,6 +126,6 @@ function draw() {
   rect(POSITION_X, height - 20, BuckWidth, BuckHeight);
   fill(10, 200, 100);
   stroke(100, 150, 100);
-  line(POSITION_X + BuckWidth / 2, height - 30, DirX, DirY);
+
   //.drawingContext.lineWidth = 10;
 }
