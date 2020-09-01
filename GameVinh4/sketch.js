@@ -1,6 +1,8 @@
 var Engine = Matter.Engine,
   World = Matter.World,
-  Bodies = Matter.Bodies;
+  Bodies = Matter.Bodies,
+  Mouse = Matter.Mouse,
+  MouseConstraint = Matter.MouseConstraint;
 //======================================
 var engine,
   N = 0;
@@ -10,8 +12,9 @@ var box1,
 let GROUND;
 let GROUNDS = [],
   Radars;
+let mConstranint;
 function setup() {
-  createCanvas(1200, 400);
+  var canvas = createCanvas(1200, 400);
 
   engine = Engine.create(); //create engine
   world = engine.world; //create wolrd
@@ -37,6 +40,15 @@ function setup() {
   GROUNDS.push(new Ground(width / 2, height, width, 20, PI));
 
   rectMode(CENTER);
+  var canvasMouse = Mouse.create(canvas.elt);
+  canvasMouse.pixelRatio = pixelDensity();
+  var ops = {
+    mouse: canvasMouse,
+    body: circles[0],
+  };
+  mConstranint = MouseConstraint.create(engine, ops);
+  setInterval(() => {}, 3000);
+  World.add(world, mConstranint);
 }
 
 // function mousePressed() {
@@ -64,7 +76,8 @@ let DirX = 300,
 function keyReleased() {
   if (key == " ") {
     //console.log(DirY + "   " + DirX);
-    circles.push(new Circle(DirX, DirY, 13, [0, 0, 0], N));
+    circles.push(new Circle(DirX + 100 / 2, DirY - 50, 13, [0, 0, 0], N));
+    circles[0].show(Radars.p);
   }
   N = 0;
 }
@@ -88,25 +101,31 @@ function draw() {
   }
   if (keyIsDown(UP_ARROW)) {
     Radars.up(-PI / 60);
+    console.log(Radars.p);
   }
   if (keyIsDown(DOWN_ARROW)) {
     Radars.down(-PI / 60);
+    console.log(Radars.p);
     //DirY = Math.sqrt(Math.abs(2 * 2 - ((DirX + 300) ^ 2))) + 200;
   }
   if (keyIsDown(32)) {
     N++;
     N = N > 100 ? 100 : N;
     document.getElementsByClassName("engine")[0].style.width = N + "%";
-    console.log(document.getElementsByClassName("engine")[0].width);
   }
   background(51);
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
-    circles[i].shot(
-      Radars.body.x + Radars.body.w,
-      Radars.body.y + Radars.body.h
-    );
+    fill(0, 255, 0);
+    // line(
+    //   circles[i].body.position.x,
+    //   circles[i].body.position.y,
+    //   mConstranint.constraint.pointA.x,
+    //   mConstranint.constraint.pointA.y
+    // );
+
+    circles[i].shot(Radars.p);
     if (circles[i].crashGround()) {
       circles[i].removeFromWorld();
       circles.splice(i, 1);

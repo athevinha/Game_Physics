@@ -7,20 +7,20 @@ function Circle(x, y, r, RadomColor, N) {
   World.add(world, this.body);
   fill(10, 200, 100);
   line(0, height, width, height);
-  this.a = 0;
   this.N = N;
-  this.shot = function (eniX, eniY) {
-    this.a++;
-    if (this.a < 10) {
-      console.log(this.a);
-      let pos = this.body.position;
-      console.log(this.N / 20);
-      pos.x += this.N / 20 - 0.5;
-      pos.y -= this.N / 20;
-    }
+  this.shot = function (p) {
+    //y=x+p;
+    let pos = this.body.position;
+    push();
+    pos.x = -1 / p;
+    pos.y = p;
+    translate(pos.x, pos.y);
+    console.log(pos.x + " " + pos.y);
+    //rect(0, 0, this.w, this.h);
+
+    pop();
   };
   this.crashGround = function () {
-    this.a = 0;
     if (this.body.position.y >= height - 20) {
       console.log();
       return true;
