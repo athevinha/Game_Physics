@@ -26,7 +26,7 @@ function Circle(x, y, r, RadomColor, N) {
     }
   };
   this.show = function () {
-    let restitutionCir = 1 + (N * 4) / 100;
+    let restitutionCir = 1 + (this.N * 4) / 100;
     this.body.restitution = restitutionCir;
     let pos = this.body.position;
     let { angle } = this.body;
