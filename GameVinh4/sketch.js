@@ -24,10 +24,9 @@ function setup() {
   // World.add(world, box1); //render
   // console.log(box1);
   //box1 = new Box(100, 100, 100, 8);
-  let optionsRadars = {
-    isStatic: true,
-  };
-  Radars = new Radar(DirX - 10, DirY - 15, 100, 5, optionsRadars);
+
+  Radars = new Ground(DirX - 10, DirY - 15, 100, 5, PI / 60);
+
   let options = {
     isStatic: true,
     angle: PI / 4,
@@ -63,7 +62,7 @@ function setup() {
 
 let a = 0,
   POSITION_X = 200,
-  FASTER = 8,
+  FASTER = 3,
   BuckWidth = 100,
   BuckHeight = 20,
   POINT = 0;
@@ -75,16 +74,16 @@ let DirX = 300,
 
 function keyReleased() {
   if (key == " ") {
-    //console.log(DirY + "   " + DirX);
-    circles.push(new Circle(DirX + 100 / 2, DirY - 50, 13, [0, 0, 0], N));
-    circles[0].show(Radars.p);
+    circles.push(new Circle(POSITION_X + 50, height - 200, 13, [0, 0, 0], N));
   }
   N = 0;
 }
 function draw() {
+  // mouseIsPressed = true;
+  // mouseButton = RIGHT;
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
-    Radars.left(FASTER);
+    // Radars.left(FASTER);
     DirX -= FASTER;
 
     if (POSITION_X < BuckWidth / 2) {
@@ -95,18 +94,18 @@ function draw() {
     if (POSITION_X > width - BuckWidth / 2) {
       POSITION_X = width - BuckWidth / 2;
     }
-    Radars.right(FASTER);
+    // Radars.right(FASTER);
     POSITION_X += FASTER;
     DirX += FASTER;
   }
   if (keyIsDown(UP_ARROW)) {
-    Radars.up(-PI / 60);
-    console.log(Radars.p);
+    Radars.up();
+    //   console.log(Radars.p);
   }
   if (keyIsDown(DOWN_ARROW)) {
-    Radars.down(-PI / 60);
-    console.log(Radars.p);
-    //DirY = Math.sqrt(Math.abs(2 * 2 - ((DirX + 300) ^ 2))) + 200;
+    Radars.down();
+    //   console.log(Radars.p);
+    //   //DirY = Math.sqrt(Math.abs(2 * 2 - ((DirX + 300) ^ 2))) + 200;
   }
   if (keyIsDown(32)) {
     N++;
@@ -117,7 +116,7 @@ function draw() {
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].show();
-    fill(0, 255, 0);
+
     // line(
     //   circles[i].body.position.x,
     //   circles[i].body.position.y,
@@ -125,7 +124,6 @@ function draw() {
     //   mConstranint.constraint.pointA.y
     // );
 
-    circles[i].shot(Radars.p);
     if (circles[i].crashGround()) {
       circles[i].removeFromWorld();
       circles.splice(i, 1);
