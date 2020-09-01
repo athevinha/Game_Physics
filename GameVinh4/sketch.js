@@ -32,7 +32,7 @@ function setup() {
     angle: PI / 4,
   };
 
-  GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
+  //GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
   // GROUNDS.push(new Ground(200, 0, width, 10, PI / 4));
   // GROUNDS.push(new Ground(0, 100, 10, height, PI / 1.5));
   // GROUNDS.push(new Ground(height, 200, 10, height, PI / 4));
