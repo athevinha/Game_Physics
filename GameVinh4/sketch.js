@@ -32,7 +32,7 @@ function setup() {
     angle: PI / 4,
   };
 
-  // GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
+  GROUNDS.push(new Ground(200, height, width, 10, PI / 4));
   // GROUNDS.push(new Ground(200, 0, width, 10, PI / 4));
   // GROUNDS.push(new Ground(0, 100, 10, height, PI / 1.5));
   // GROUNDS.push(new Ground(height, 200, 10, height, PI / 4));
@@ -83,7 +83,7 @@ function draw() {
   // mouseButton = RIGHT;
   if (keyIsDown(LEFT_ARROW)) {
     POSITION_X -= FASTER;
-    // Radars.left(FASTER);
+    Radars.left(FASTER);
     DirX -= FASTER;
 
     if (POSITION_X < BuckWidth / 2) {
@@ -94,7 +94,7 @@ function draw() {
     if (POSITION_X > width - BuckWidth / 2) {
       POSITION_X = width - BuckWidth / 2;
     }
-    // Radars.right(FASTER);
+    Radars.right(FASTER);
     POSITION_X += FASTER;
     DirX += FASTER;
   }

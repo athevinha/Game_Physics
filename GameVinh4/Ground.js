@@ -18,6 +18,13 @@ function Ground(x, y, w, h, angle) {
     this.angle -= PI;
     Matter.Body.rotate(this.body, -this.angle);
   };
+  this.left = function () {
+    // this.body.position.x -= 3;
+    // Matter.Body.setPosition(this.body);
+  };
+  this.right = function () {
+    // Matter.Body.setPosition(this.body);
+  };
   World.add(world, this.body);
   this.show = function () {
     let pos = this.body.position;

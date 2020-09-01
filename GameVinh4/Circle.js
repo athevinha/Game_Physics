@@ -11,7 +11,7 @@ function Circle(x, y, r, RadomColor, N) {
 
   this.crashGround = function () {
     if (this.body.position.y >= height - 30) {
-      this.body.restitution = 0.5;
+      this.body.restitution = 1;
       return false;
     }
   };
