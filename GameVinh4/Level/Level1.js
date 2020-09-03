@@ -1,6 +1,7 @@
 function nextLevel1() {
   let ObaX = 900,
     ObaY = 300;
+  GROUNDS.push(new Ground(500, height, 400, 10, PI / 2));
   //Radars = new Ground(DirX - 10, DirY - 15, 100, 5, PI / 60);
   for (let i = 0; i < 20; i++) {
     let RamdomColor = [];
