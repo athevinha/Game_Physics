@@ -27,16 +27,9 @@ function setup() {
   //box1 = new Box(100, 100, 100, 8);
   let ObaX = 900,
     ObaY = 300;
-  Radars = new Ground(200, DirY - 15, 100, 5, PI / 60);
-  for (let i = 0; i < 40; i++) {
-    let RamdomColor = [];
-    RamdomColor.push(Math.floor(Math.random() * 150) + 100);
-    RamdomColor.push(Math.floor(Math.random() * 200) + 100);
-    RamdomColor.push(Math.floor(Math.random() * 125) + 100);
-    Obas.push(new Oba(ObaX, ObaY, 25, 25, RamdomColor));
-    ObaX += 25;
-    if (i % 5 == 0 && i != 0) ObaX = 900;
-  }
+  Radars = new Ground(170, DirY - 15, 100, 5, PI / 60);
+  endLevel();
+  nextLevel1();
 
   let options = {
     isStatic: true,
@@ -72,7 +65,7 @@ function setup() {
 // }
 
 let a = 0,
-  POSITION_X = 200,
+  POSITION_X = 125,
   FASTER = 3,
   BuckWidth = 100,
   BuckHeight = 20,
@@ -87,7 +80,20 @@ let DirX = 300,
 function keyReleased() {
   console.log(key);
   if (key == " ") {
-    circles.push(new Circle(POSITION_X + 50, height - 200, 13, [0, 0, 0], N));
+    circles.push(
+      new Circle(
+        POSITION_X + 50,
+        height - 200,
+        13,
+        [
+          Math.floor(Math.random() * 250) + 100,
+          Math.floor(Math.random() * 250) + 100,
+          Math.floor(Math.random() * 250) + 100,
+        ],
+        N
+      )
+    );
+
     console.log(circles);
   } else if (key == 1) {
     LEVEL = 1;

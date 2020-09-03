@@ -4,7 +4,7 @@ function nextLevel4() {
   let ObaX = 900,
     ObaY = 300;
   //Radars = new Ground(DirX - 10, DirY - 15, 100, 5, PI / 60);
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 20; i++) {
     let RamdomColor = [];
     RamdomColor.push(Math.floor(Math.random() * 150) + 100);
     RamdomColor.push(Math.floor(Math.random() * 200) + 100);
