@@ -27,7 +27,7 @@ function setup() {
   //box1 = new Box(100, 100, 100, 8);
   let ObaX = 900,
     ObaY = 300;
-  Radars = new Ground(DirX - 10, DirY - 15, 100, 5, PI / 60);
+  Radars = new Ground(200, DirY - 15, 100, 5, PI / 60);
   for (let i = 0; i < 40; i++) {
     let RamdomColor = [];
     RamdomColor.push(Math.floor(Math.random() * 150) + 100);
@@ -168,12 +168,12 @@ function draw() {
     // if (circleBottom > 380) {
     //   circles[i].body.restitution = 0.7;
     // }
-    if (circles[i].IsCrash(0, 400, 1200, 20)) {
-      circles[i].body.restitution = 1;
-      circles[i].removeFromWorld();
-      circles.splice(i, 1);
-      i--;
-    }
+    // if (circles[i].IsCrashs(0, 370, 1200, 20)) {
+    //   circles[i].body.restitution = 1;
+    //   circles[i].removeFromWorld();
+    //   circles.splice(i, 1);
+    //   i--;
+    // }
   }
   Radars.show();
   for (let i = 0; i < GROUNDS.length; i++) {

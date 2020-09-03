@@ -19,32 +19,12 @@ function Circle(x, y, r, RadomColor, N) {
     World.remove(world, this.body);
   };
 
-  this.IsCrash = function (OBJX, OBJY, OBJW, OBJH) {
-    let pos = this.body.position;
-    var Mytop = pos.x,
-      Mybottom = pos.x + r * 2,
-      Myright = pos.y + r * 2,
-      Myleft = pos.y,
-      Objtop = OBJY,
-      Objbottom = OBJY + OBJH,
-      Objright = OBJX + OBJW,
-      Objleft = OBJX,
-      Crash = true;
-    console.log(Mytop + " " + Myright);
-    if (
-      Mybottom < Objtop ||
-      Mytop > Objbottom ||
-      Myright < Objleft ||
-      Myleft > Objright
-    ) {
-      Crash = false;
-    }
-
-    return Crash;
-  };
   this.show = function () {
     let restitutionCir = 1 + (this.N * 4) / 100;
     this.body.restitution = restitutionCir;
+    setTimeout(() => {
+      this.body.restitution = 1;
+    }, 1000);
     let pos = this.body.position;
     let { angle } = this.body;
     push();

@@ -1,6 +1,6 @@
 function nextLevel4() {
-  // GROUNDS.push(new Ground(500, height, 400, 10, PI / 2));
-  // GROUNDS.push(new Ground(600, height / 2, 400, 10, PI));
+  GROUNDS.push(new Ground(500, height, 400, 10, PI / 2));
+  GROUNDS.push(new Ground(600, height / 2, 400, 10, PI));
   let ObaX = 900,
     ObaY = 300;
   //Radars = new Ground(DirX - 10, DirY - 15, 100, 5, PI / 60);
