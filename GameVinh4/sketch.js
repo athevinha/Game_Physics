@@ -172,7 +172,7 @@ function draw() {
     //   circles[i].body.restitution = 1;
     //   circles[i].removeFromWorld();
     //   circles.splice(i, 1);
-    //   i--;
+    //   i--
     // }
   }
   Radars.show();
