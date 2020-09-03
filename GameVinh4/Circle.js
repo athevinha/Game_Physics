@@ -8,9 +8,9 @@ function Circle(x, y, r, RadomColor, N) {
   fill(10, 200, 100);
   line(0, height, width, height);
   this.N = N;
-
+  this.r = r;
   this.crashGround = function () {
-    if (this.body.position.y >= height - 30) {
+    if (this.body.position.y >= height - 40) {
       this.body.restitution = 1;
       return false;
     }
@@ -18,12 +18,29 @@ function Circle(x, y, r, RadomColor, N) {
   this.removeFromWorld = function () {
     World.remove(world, this.body);
   };
+
   this.IsCrash = function (OBJX, OBJY, OBJW, OBJH) {
     let pos = this.body.position;
-    // console.log(pos.x + " " + pos.y);
-    if (pos.x > OBJX - OBJW / 2 && pos.x + r * 2 < OBJX + OBJW) {
-      if (pos.y + r * 2 >= height - 30) return true;
+    var Mytop = pos.x,
+      Mybottom = pos.x + r * 2,
+      Myright = pos.y + r * 2,
+      Myleft = pos.y,
+      Objtop = OBJY,
+      Objbottom = OBJY + OBJH,
+      Objright = OBJX + OBJW,
+      Objleft = OBJX,
+      Crash = true;
+    console.log(Mytop + " " + Myright);
+    if (
+      Mybottom < Objtop ||
+      Mytop > Objbottom ||
+      Myright < Objleft ||
+      Myleft > Objright
+    ) {
+      Crash = false;
     }
+
+    return Crash;
   };
   this.show = function () {
     let restitutionCir = 1 + (this.N * 4) / 100;

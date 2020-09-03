@@ -19,11 +19,16 @@ function Ground(x, y, w, h, angle) {
     Matter.Body.rotate(this.body, -this.angle);
   };
   this.left = function () {
-    // this.body.position.x -= 3;
-    // Matter.Body.setPosition(this.body);
+    // x -= 3;
+    // console.log(this.body);
   };
   this.right = function () {
-    // Matter.Body.setPosition(this.body);
+    // x += 3;
+    // translate(x, this.body.position.y);
+    //Matter.Body.scale(this.body, this.body.position.x, this.body.position.y);
+  };
+  this.removeFromWorld = function () {
+    World.remove(world, this.body);
   };
   World.add(world, this.body);
   this.show = function () {
