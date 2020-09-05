@@ -24,6 +24,7 @@ function Circle(x, y, r, RadomColor, N) {
     this.body.restitution = restitutionCir;
     setTimeout(() => {
       this.body.restitution = 1;
+      Matter.Body.setDensity(this.body, 5);
     }, 1000);
     let pos = this.body.position;
     let { angle } = this.body;
